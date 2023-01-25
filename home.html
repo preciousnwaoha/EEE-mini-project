@@ -220,7 +220,7 @@ footer {
     <header>
         <h1>PDB Control Lab</h1>
         <div>
-            <h2>Phase 1</h2>
+            <h2 id="onphase">ON: </h2>
             <button>Reset All Phases</button>
         </div>
     </header>
@@ -230,8 +230,8 @@ footer {
             <span class="ac-phase phase-1" id="phase-1">
                 <div>
                     <h4>Phase 1 Voltage</h4>
-                    <p class="voltage">250v</p>
-                    <p class="suggestion">This is a suggestion</p>
+                    <p class="voltage" id="v1">0</p>
+                    <p class="suggestion" id="sug1"></p>
                 </div>
                 <button onclick="selectPhase(1)">
                     Select Phase
@@ -240,8 +240,8 @@ footer {
             <span class="ac-phase selected phase-2"  id="phase-2">
                 <div>
                     <h4>Phase 2 Voltage</h4>
-                    <p class="voltage">250v</p>
-                    <p class="suggestion">This is a suggestion</p>
+                    <p class="voltage" id="v2">0</p>
+                    <p class="suggestion" id="sug2"></p>
                 </div>
                 <button onclick="selectPhase(1)">
                     Select Phase
@@ -250,8 +250,8 @@ footer {
             <span class="ac-phase phase-3"  id="phase-3">
                 <div>
                     <h4>Phase 3 Voltage</h4>
-                    <p class="voltage">250v</p>
-                    <p class="suggestion">This is a suggestion</p>
+                    <p class="voltage" id="v3">0</p>
+                    <p class="suggestion" id="sug3"></p>
                 </div>
                 <button onclick="selectPhase(1)">
                     Select Phase
