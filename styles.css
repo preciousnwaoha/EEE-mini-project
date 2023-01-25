@@ -72,11 +72,14 @@ header div button {
     border: none;
     padding: 0.5rem 1.5rem;
     border-radius: 1rem;
-    color: var(--primary);
+    color: var(--dark);
     background: var(--light);
-    
+    cursor: pointer;
 }
 
+header div button:hover {
+    color: var(--secondary);
+}
 
 
 main {
@@ -205,6 +208,10 @@ footer {
         background: var(--primary);
         color: var(--secondary);
     }
+    header div button:hover {
+        background: var(--primary-dark);
+    }
+    
 
     main {
         /* border: 1px solid red; */
