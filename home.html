@@ -78,11 +78,14 @@ header div button {
     border: none;
     padding: 0.5rem 1.5rem;
     border-radius: 1rem;
-    color: var(--primary);
-    background: var(--light);
-    
+    color: var(--secondary);
+    background: var(--primary);
+    cursor: pointer;
 }
 
+header div button {
+    background: var(--primary-dark);
+}
 
 
 main {
@@ -237,7 +240,7 @@ footer {
                     Select Phase
                 </button>
             </span>
-            <span class="ac-phase selected phase-2"  id="phase-2">
+            <span class="ac-phase phase-2"  id="phase-2">
                 <div>
                     <h4>Phase 2 Voltage</h4>
                     <p class="voltage" id="v2">0</p>
@@ -264,6 +267,11 @@ footer {
         EEE Mini porject &copy; UNN 2020
     </footer>
     <script>
+        var phase1 = document.querySelector(".phase1");
+        var phase2 = document.querySelector(".phase2");
+        var phase3 = document.querySelector(".phase3");
+
+
         getVoltages();
         setInterval(getVoltages, 3000 );
         function selectPhase(phase) {
@@ -277,18 +285,27 @@ footer {
             console.log("select1 sent");
             xhttp.open("GET", "/select1", true);
             xhttp.send();
+            phase1.classList.add("selected");
+            phase2.classList.remove("selected");
+            phase3.classList.remove("selected");
           }
           else if(phase == 2)
           {
             xhttp.open("GET", "/select2", true);
             xhttp.send();
             console.log("select2 sent");
+            phase2.classList.add("selected");
+            phase3.classList.remove("selected");
+            phase1.classList.remove("selected");
           }
           else if(phase == 3)
           {
             console.log("select3 sent");
             xhttp.open("GET", "/select3", true);
             xhttp.send();
+            phase3.classList.add("selected");
+            phase2.classList.remove("selected");
+            phase1.classList.remove("selected");
           }
         }
 
@@ -307,9 +324,9 @@ footer {
           var xhttp = new XMLHttpRequest();
           xhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
-              document.getElementById("v1").innerHTML = JSON.parse(this.responseText).v1;
-              document.getElementById("v2").innerHTML = JSON.parse(this.responseText).v2;
-              document.getElementById("v3").innerHTML = JSON.parse(this.responseText).v3;
+              document.getElementById("v1").innerHTML = JSON.parse(this.responseText).v1 + "V";
+              document.getElementById("v2").innerHTML = JSON.parse(this.responseText).v2 + "V";
+              document.getElementById("v3").innerHTML = JSON.parse(this.responseText).v3 + "V";
             }
           };
           console.log("requesting Voltages");
