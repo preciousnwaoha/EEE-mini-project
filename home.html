@@ -221,7 +221,7 @@ footer {
         <h1>PDB Control Lab</h1>
         <div>
             <h2 id="onphase">ON: </h2>
-            <button>Reset All Phases</button>
+            <button onclick="resetPhases()">Reset All Phases</button>
         </div>
     </header>
 
@@ -243,7 +243,7 @@ footer {
                     <p class="voltage" id="v2">0</p>
                     <p class="suggestion" id="sug2"></p>
                 </div>
-                <button onclick="selectPhase(1)">
+                <button onclick="selectPhase(2)">
                     Select Phase
                 </button>
             </span>
@@ -253,7 +253,7 @@ footer {
                     <p class="voltage" id="v3">0</p>
                     <p class="suggestion" id="sug3"></p>
                 </div>
-                <button onclick="selectPhase(1)">
+                <button onclick="selectPhase(3)">
                     Select Phase
                 </button>
             </span>
@@ -264,11 +264,8 @@ footer {
         EEE Mini porject &copy; UNN 2020
     </footer>
     <script>
-        routines();
-        setInterval(routines, 3000 );
-        function routines()
-        {
-        }
+        getVoltages();
+        setInterval(getVoltages, 3000 );
         function selectPhase(phase) {
           var xhttp = new XMLHttpRequest();
           xhttp.onreadystatechange = function() {
@@ -277,6 +274,7 @@ footer {
           };
           if(phase == 1)
           {
+            console.log("select1 sent");
             xhttp.open("GET", "/select1", true);
             xhttp.send();
           }
@@ -284,9 +282,11 @@ footer {
           {
             xhttp.open("GET", "/select2", true);
             xhttp.send();
+            console.log("select2 sent");
           }
           else if(phase == 3)
           {
+            console.log("select3 sent");
             xhttp.open("GET", "/select3", true);
             xhttp.send();
           }
@@ -298,6 +298,7 @@ footer {
             if (this.readyState == 4 && this.status == 200) {
             }
           };
+          console.log("resetting Phases");
           xhttp.open("GET", "/resetPhases", true);
           xhttp.send();
         }
@@ -306,11 +307,14 @@ footer {
           var xhttp = new XMLHttpRequest();
           xhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
-              document.getElementById("phase1").innerHTML = JSON.parse(this.responseText).v1;
-              document.getElementById("phase2").innerHTML = JSON.parse(this.responseText).v2;
-              document.getElementById("phase3").innerHTML = JSON.parse(this.responseText).v3;
+              document.getElementById("v1").innerHTML = JSON.parse(this.responseText).v1;
+              document.getElementById("v2").innerHTML = JSON.parse(this.responseText).v2;
+              document.getElementById("v3").innerHTML = JSON.parse(this.responseText).v3;
             }
           };
+          console.log("requesting Voltages");
+          xhttp.open("GET", "/getVoltages", true);
+          xhttp.send();
         }
         </script>
 </body>
